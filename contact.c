@@ -1,7 +1,7 @@
 #include "contact.h"
-void Loadcontact(contact* p)
+void Loadcontact(contact* p)  å®ç°é€šè®¯å½•åŠ è½½å‡½æ•°
 {
-	FILE* pf = fopen("contact.dat", "r");
+	FILE* pf = fopenï¼ˆâ€œcontact.datâ€œï¼Œ â€râ€œï¼‰;
 	if (pf == NULL)
 	{
 		perror("Loadcontact");
@@ -27,7 +27,7 @@ void Loadcontact(contact* p)
 	fclose(pf);
 	pf = NULL;
 }
-void Initcontact(contact* p)
+void Initcontact(contact* p)  åˆå§‹åŒ–é€šè®¯å½•
 {
 	p->sz = 0; p->capacity = MAXCONTACT;
 	struct people*ptr= (struct people*)malloc(MAXCONTACT * sizeof(struct people));
@@ -39,10 +39,11 @@ void Initcontact(contact* p)
 	p->date = ptr;
 	Loadcontact(p);
 	}
-void savecontact(contact* p)
-{
+void savecontact(contact* p) ä¿å­˜è”ç³»äºº
+{ 
+ åˆ©ç”¨æ–‡ä»¶å‡½æ•°å­˜å‚¨è”ç³»äººä¿¡æ¯
 	FILE* pf = fopen("contact.dat", "w");
-	if (pf == NULL)
+	if (pf == NULL)  
 	{
 		perror("savecontact");
 		return;
@@ -55,7 +56,7 @@ void savecontact(contact* p)
 	fclose(pf);
 	pf = NULL;
 }
-int Find_by_name(contact* p, char* name)
+int Find_by_name(contact* p, char* name) ç”¨åå­—æŸ¥æ‰¾è”ç³»äºº
 {
 	int i = 0;
 	for (i = 0; i < p->sz; i++)
@@ -69,27 +70,27 @@ int Find_by_name(contact* p, char* name)
 		
 		return -1;
 	}
-void Addcontact(contact* p)
+void Addcontact(contact* p) æ·»åŠ è”ç³»äºº
 {
 	if (p->sz == MAX)
 	{
-		printf("ÁªÏµÈËÒÑÂú£¬ÎŞ·¨Ìí¼Ó\n");
+		printf("è”ç³»äººå·²æ»¡ï¼Œæ— æ³•æ·»åŠ \n");
 		return;
 	}
 	if (p->capacity > p->sz)
 	{
-		printf("ÇëÊäÈëĞÕÃû\n");
+		printf("è¯·è¾“å…¥å§“å\n");
 		scanf("%s", p->date[p->sz].name);
-		printf("ÇëÊäÈëĞÔ±ğ\n");
+		printf("è¯·è¾“å…¥æ€§åˆ«\n");
 		scanf("%s", p->date[p->sz].sex);
-		printf("ÇëÊäÈëÄêÁä\n");
+		printf("è¯·è¾“å…¥å¹´é¾„\n");
 		scanf("%d", &(p->date[p->sz].age));
-		printf("ÇëÊäÈëµØÖ·\n");
+		printf("è¯·è¾“å…¥åœ°å€\n");
 		scanf("%s", p->date[p->sz].add);
-		printf("ÇëÊäÈëµç»°\n");
+		printf("è¯·è¾“å…¥ç”µè¯\n");
 		scanf("%s", p->date[p->sz].tell);
 		p->sz++;
-		printf("Ìí¼Ó³É¹¦\n");
+		printf("æ·»åŠ æˆåŠŸ\n");
 	}
 	else
 	{
@@ -104,15 +105,15 @@ void Addcontact(contact* p)
 	}
 }
 	
-void Delcontact(contact* p)
+void Delcontact(contact* p) åˆ é™¤è”ç³»äºº
 {
 	char name[20] = { 0 };
-	printf("ÇëÊäÈëÄãÒªÉ¾³ıµÄĞÕÃû\n");
+	printf("è¯·è¾“å…¥ä½ è¦åˆ é™¤çš„å§“å\n");
 	scanf("%s", name);
 	int ret=Find_by_name(p, name);
 	if (ret == -1)
 	{
-		printf("Ã»ÓĞÕÒµ½¸ÃÁªÏµÈË\n");
+		printf("æ²¡æœ‰æ‰¾åˆ°è¯¥è”ç³»äºº\n");
 		return;
 	}
 	else
@@ -128,68 +129,68 @@ void Delcontact(contact* p)
 		if (ptr == NULL)
 		{
 			perror("Delcontact");
-			printf("É¾³ıÊ§°Ü\n");
+			printf("åˆ é™¤å¤±è´¥\n");
 			return;
 		}
 		p->date = ptr;
 		
 	}
-	printf("ÁªÏµÈËÒÑ¾­É¾³ı\n");
+	printf("è”ç³»äººå·²ç»åˆ é™¤\n");
 }
-void printcontact(contact* p)
+void printcontact(contact* p)  æ‰“å°è”ç³»äººä¿¡æ¯
 {
 	int i = 0;
-	printf("%-20s\t%-5s\t%-5s\t%-20s\t%-12s\n", "ĞÕÃû", "ÄêÁä", "ĞÔ±ğ", "µØÖ·", "µç»°");
+	printf("%-20s\t%-5s\t%-5s\t%-20s\t%-12s\n", "å§“å", "å¹´é¾„", "æ€§åˆ«", "åœ°å€", "ç”µè¯");
 	for (i = 0; i < p->sz; i++)
 	{
 		printf("%-20s\t%-5d\t%-5s\t%-20s\t%-12s\n", p->date[i].name, p->date[i].age, p->date[i].sex, p->date[i].add, p->date[i].tell);
 	}
 }
-void modifycontact(contact* p)
+void modifycontact(contact* p) ä¿®æ”¹é€šè®¯å½•
 {
 	char name[20] = { 0 };
-	printf("ÇëÊäÈëÄãÒªĞŞ¸ÄµÄĞÕÃû\n");
+	printf("è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„å§“å\n");
 	scanf("%s", name);
 	int ret = Find_by_name(p, name);
 	if (ret == -1)
 	{
-		printf("Ã»ÓĞÕÒµ½¸ÃÁªÏµÈË\n");
+		printf("æ²¡æœ‰æ‰¾åˆ°è¯¥è”ç³»äºº\n");
 		return;
 	}
 	else
 	{
-		printf("ÇëÊäÈëĞÕÃû\n");
+		printf("è¯·è¾“å…¥å§“å\n");
 		scanf("%s", p->date[ret].name);
-		printf("ÇëÊäÈëĞÔ±ğ\n");
+		printf("è¯·è¾“å…¥æ€§åˆ«\n");
 		scanf("%s", p->date[ret].sex);
-		printf("ÇëÊäÈëÄêÁä\n");
+		printf("è¯·è¾“å…¥å¹´é¾„\n");
 		scanf("%d", &(p->date[ret].age));
-		printf("ÇëÊäÈëµØÖ·\n");
+		printf("è¯·è¾“å…¥åœ°å€\n");
 		scanf("%s", p->date[ret].add);
-		printf("ÇëÊäÈëµç»°\n");
+		printf("è¯·è¾“å…¥ç”µè¯\n");
 		scanf("%s", p->date[ret].tell);
-		printf("ĞŞ¸Ä³É¹¦\n");
+		printf("ä¿®æ”¹æˆåŠŸ\n");
 		return;
 	}
 	}
-void findcontact(contact* p)
+void findcontact(contact* p) æŸ¥æ‰¾è”ç³»äºº
 {
 	char name[20] = { 0 };
-	printf("ÇëÊäÈëÄãÒª²éÕÒµÄĞÕÃû\n");
+	printf("è¯·è¾“å…¥ä½ è¦æŸ¥æ‰¾çš„å§“å\n");
 	scanf("%s", name);
 	int ret = Find_by_name(p, name);
 	if (ret == -1)
 	{
-		printf("Ã»ÓĞÕÒµ½¸ÃÁªÏµÈË\n");
+		printf("æ²¡æœ‰æ‰¾åˆ°è¯¥è”ç³»äºº\n");
 		return;
 	}
 	else
 	{
-		printf("%-20s\t%-5s\t%-5s\t%-20s\t%-12s\n", "ĞÕÃû", "ÄêÁä", "ĞÔ±ğ", "µØÖ·", "µç»°");
+		printf("%-20s\t%-5s\t%-5s\t%-20s\t%-12s\n", "å§“å", "å¹´é¾„", "æ€§åˆ«", "åœ°å€", "ç”µè¯");
 		printf("%-20s\t%-5d\t%-5s\t%-20s\t%-12s\n", p->date[ret].name, p->date[ret].age, p->date[ret].sex, p->date[ret].add, p->date[ret].tell);
 	}
 }
-void freecapacity(contact* p)
+void freecapacity(contact* p)  é”€æ¯é€šè®¯å½•
 {
 	free(p->date);
 	p->date = NULL;
